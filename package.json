@@ -1,0 +1,26 @@
+{
+  "name": "react-lib",
+  "version": "1.0.0",
+  "description": "Shared React components",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nononsensecoding/react-lib.git"
+  },
+  "keywords": [
+    "react",
+    "accessible",
+    "theme",
+    "themable",
+    "lightweight"
+  ],
+  "author": "Terry Rosen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nononsensecoding/react-lib/issues"
+  },
+  "homepage": "https://github.com/nononsensecoding/react-lib#readme"
+}
