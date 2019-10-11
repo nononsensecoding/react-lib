@@ -32,9 +32,11 @@ This is collection of accessible, high quality, themeable, openly available Reac
 
    render() {
        return (
-           <Button onClick={(e) => console.log(e)}>Click me</Button>
-           <p>We saved <Statistic>2000</Statistic> hours in a single week using react-lib!</p>
-           <Calendar month={1} day={20} year={2019} />
+           <div>
+                <Button onClick={(e) => console.log(e)}>Click me</Button>
+                <p>We saved <Statistic>2000</Statistic> hours in a single week using react-lib!</p>
+                <Calendar month={1} day={20} year={2019} />
+           </div>
        )
    }
    ```
