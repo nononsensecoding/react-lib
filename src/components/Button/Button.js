@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
+const Container = styled.button`
+  font-weight: ${({ theme, isHovering }) =>
+    isHovering ? theme.buttonHoverFontWeight : "normal"};
+`;
 
 class Button extends Component {
   constructor(props) {
@@ -25,17 +31,19 @@ class Button extends Component {
   }
 
   render() {
-    const { children, ...attrs } = this.props;
+    const { children, theme, ...attrs } = this.props;
     const { isHovering } = this.state;
 
     return (
-      <button
+      <Container
         {...attrs}
+        isHovering={isHovering}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        theme={theme}
       >
-        {`${children} ${isHovering ? " hovering" : ""}`}
-      </button>
+        {children}
+      </Container>
     );
   }
 }
