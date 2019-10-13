@@ -7,6 +7,12 @@ export default {
   buttonFontSize: "14px",
   buttonHoverFontWeight: "bold",
 
+  buttonSecondaryBorderColor: "auto",
+  buttonSecondaryBackgroundColor: "#333",
+  buttonSecondaryColor: "#fff",
+  buttonSecondaryFontSize: "14px",
+  buttonSecondaryHoverFontWeight: "bold",
+
   h1Color: "#333",
   h2Color: "blue",
   h3Color: "#333",
