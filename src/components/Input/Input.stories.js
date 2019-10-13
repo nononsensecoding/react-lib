@@ -6,3 +6,6 @@ export default {
 };
 
 export const defaultUsage = () => <Input />;
+
+export const valid = () => <Input isValid />;
+export const invalid = () => <Input isValid={false} />;

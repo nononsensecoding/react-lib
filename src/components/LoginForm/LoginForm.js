@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Input from "../Input";
 import Label from "../Label";
+import FormField from "../FormField";
+import Button from "../Button";
+import FormActions from "../FormActions";
 
 const Container = styled.form``;
 
@@ -11,11 +14,17 @@ class LoginForm extends Component {
 
     return (
       <Container theme={theme}>
-        <Label>Username:</Label>
-        <Input name="username" />
-
-        <Label>Password:</Label>
-        <Input name="password" type="password" />
+        <FormField>
+          <Label>Username:</Label>
+          <Input name="username" />
+        </FormField>
+        <FormField>
+          <Label>Password:</Label>
+          <Input name="password" type="password" />
+        </FormField>
+        <FormActions>
+          <Button>Submit</Button>
+        </FormActions>
       </Container>
     );
   }
