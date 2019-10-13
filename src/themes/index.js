@@ -1,7 +1,8 @@
-import lightTheme from "./light";
-import defaultTheme from "./default";
-
 export default {
-  lightTheme,
-  defaultTheme
+  name: "Default",
+  buttonBorderColor: "auto",
+  buttonBackgroundColor: "#eee",
+  buttonColor: "#333",
+  buttonFontSize: "14px",
+  buttonHoverFontWeight: "bold"
 };

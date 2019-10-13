@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Container = styled.button`
+  color: ${({ theme }) => theme.buttonColor || "#000"};
+  background-color: ${({ theme }) => theme.buttonBackgroundColor || "#eee"};
+  border-color: ${({ theme }) => theme.buttonBorderColor || "#eee"};
+  font-size: ${({ theme }) => theme.buttonFontSize || "16px"};
   font-weight: ${({ theme, isHovering }) =>
     isHovering ? theme.buttonHoverFontWeight : "normal"};
+  min-width: 100px;
+  padding: 6px 4px;
 `;
 
 class Button extends Component {

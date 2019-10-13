@@ -10,7 +10,7 @@ export const idle = () => <Button>Hello Button</Button>;
 export const emojiChildren = () => (
   <Button>
     <span role="img" aria-label="so cool">
-      😀 😎 👍 💯
+      😀 😎 with text
     </span>
   </Button>
 );
