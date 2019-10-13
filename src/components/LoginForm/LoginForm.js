@@ -15,12 +15,20 @@ class LoginForm extends Component {
     return (
       <Container theme={theme}>
         <FormField>
-          <Label>Username:</Label>
-          <Input name="username" />
+          {({ isValid }) => (
+            <>
+              <Label isValid={isValid}>Username:</Label>
+              <Input name="username" />
+            </>
+          )}
         </FormField>
         <FormField>
-          <Label>Password:</Label>
-          <Input name="password" type="password" />
+          {({ isValid }) => (
+            <>
+              <Label isValid={isValid}>Password:</Label>
+              <Input name="password" type="password" />
+            </>
+          )}
         </FormField>
         <FormActions>
           <Button>Submit</Button>

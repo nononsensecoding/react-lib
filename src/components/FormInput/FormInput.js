@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Input from "../Input";
-import { valid } from "../Input/Input.stories";
 
 class FormInput extends Component {
   constructor(props) {
@@ -8,36 +7,49 @@ class FormInput extends Component {
     this.handleBlur = this.handleBlur.bind(this);
 
     this.state = {
-      isValid: true
+      isValid: false,
+      isInvalid: false
     };
   }
 
   handleBlur(event) {
-    this.setValidState(event.target.value);
+    this.setValidStates(event.target.value);
   }
 
-  setValidState(val) {
-    const { validator } = this.props;
+  setValidStates(val) {
+    const { validator, setValidState, setInvalidState } = this.props;
+    const isValid = validator(val);
 
     if (validator) {
       this.setState({
-        isValid: validator(val)
+        isValid,
+        isInvalid: !isValid
       });
+    }
+
+    if (setValidState) {
+      setValidState(isValid);
+      setInvalidState(!isValid);
     }
   }
 
   render() {
-    const { theme, validator, ...others } = this.props;
-    const { isValid } = this.state;
+    const { theme, validator, validateOnEvents, ...others } = this.props;
+    const { isValid, isInvalid } = this.state;
+
+    const validateOnBlur =
+      validateOnEvents && validateOnEvents.find(e => e === "blur");
 
     return (
       <Input
         isValid={isValid}
+        isInvalid={isInvalid}
         theme={theme}
-        onBlur={this.handleBlur}
+        onBlur={validateOnBlur ? this.handleBlur : null}
         {...others}
       />
     );
   }
 }
+
 export default FormInput;
