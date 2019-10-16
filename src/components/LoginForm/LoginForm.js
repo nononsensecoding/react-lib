@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import FormInput from "../FormInput";
-import Label from "../Label";
+import FormFieldLabel from "../FormFieldLabel";
 import FormField from "../FormField";
-import FormFieldManager from "../FormFieldManager";
 import Button from "../Button";
 import FormActions from "../FormActions";
 
@@ -15,26 +14,18 @@ class LoginForm extends Component {
 
     return (
       <Container theme={theme}>
-        <FormFieldManager>
-          {({ isValid }) => (
-            <FormField>
-              <Label isValid={isValid}>Username:</Label>
-              <FormInput
-                validateOnEvents={["blur"]}
-                validator={val => val === "terry"}
-                name="username"
-              />
-            </FormField>
-          )}
-        </FormFieldManager>
-        <FormFieldManager>
-          {({ isValid }) => (
-            <FormField>
-              <Label isValid={isValid}>Password:</Label>
-              <FormInput name="password" type="password" />
-            </FormField>
-          )}
-        </FormFieldManager>
+        <FormField>
+          <FormFieldLabel>Username:</FormFieldLabel>
+          <FormInput
+            validateOnEvents={["blur"]}
+            validator={val => val === "terry"}
+            name="username"
+          />
+        </FormField>
+        <FormField>
+          <FormFieldLabel>Password:</FormFieldLabel>
+          <FormInput name="password" type="password" />
+        </FormField>
         <FormActions>
           <Button>Submit</Button>
         </FormActions>

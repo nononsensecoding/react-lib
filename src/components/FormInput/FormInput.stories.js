@@ -1,6 +1,5 @@
 import React from "react";
 import FormInput from "./FormInput";
-import { isValidUsername } from "../../utils";
 
 export default {
   title: "FormInput"
@@ -10,9 +9,9 @@ export const defaultUsage = () => <FormInput />;
 
 export const number = () => <FormInput type="number" />;
 
-export const withCustomValidator = () => (
-  <FormInput
-    validateOnEvents={["blur", "keydown"]}
-    validator={isValidUsername}
-  />
-);
+// Move to unit tests
+// export const withCustomValidator = () => (
+//   <FormField>
+//     <FormInput validateOnEvents={["blur", "keydown"]} validator={() => true} />
+//   </FormField>
+// );

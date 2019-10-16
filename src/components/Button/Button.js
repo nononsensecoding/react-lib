@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.button`
@@ -6,51 +6,26 @@ const Container = styled.button`
   background-color: ${({ theme }) => theme.buttonBackgroundColor || "#eee"};
   border-color: ${({ theme }) => theme.buttonBorderColor || "#eee"};
   font-size: ${({ theme }) => theme.buttonFontSize || "16px"};
-  font-weight: ${({ theme, isHovering }) =>
-    isHovering ? theme.buttonHoverFontWeight : "normal"};
+  font-weight: ${({ theme, isHovering, disabled }) =>
+    isHovering && !disabled ? theme.buttonHoverFontWeight : "normal"};
   min-width: 100px;
   padding: 6px 4px;
 `;
 
-class Button extends Component {
-  constructor(props) {
-    super(props);
+const Button = ({ children, theme, isDefaultHovering, ...attrs }) => {
+  const [isHovering, setHovering] = useState(isDefaultHovering);
 
-    this.state = {
-      isHovering: props.isDefaultHovering
-    };
+  return (
+    <Container
+      {...attrs}
+      isHovering={isHovering}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      theme={theme}
+    >
+      {children}
+    </Container>
+  );
+};
 
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-  }
-
-  handleMouseEnter() {
-    this.setHoverState(true);
-  }
-
-  handleMouseLeave() {
-    this.setHoverState(false);
-  }
-
-  setHoverState(isHovering) {
-    this.setState({ isHovering });
-  }
-
-  render() {
-    const { children, theme, ...attrs } = this.props;
-    const { isHovering } = this.state;
-
-    return (
-      <Container
-        {...attrs}
-        isHovering={isHovering}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        theme={theme}
-      >
-        {children}
-      </Container>
-    );
-  }
-}
 export default Button;

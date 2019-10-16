@@ -1,55 +1,32 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
+import FormFieldContext from "../FormField/FormFieldContext";
 import Input from "../Input";
 
-class FormInput extends Component {
-  constructor(props) {
-    super(props);
-    this.handleBlur = this.handleBlur.bind(this);
+const FormInput = ({ theme, validator, validateOnEvents, disabled }) => {
+  const { isValid, setIsValid, isInvalid, setIsInvalid } = useContext(
+    FormFieldContext
+  );
 
-    this.state = {
-      isValid: false,
-      isInvalid: false
-    };
-  }
+  const validateOnBlur =
+    validateOnEvents && validateOnEvents.find(e => e === "blur");
 
-  handleBlur(event) {
-    this.setValidStates(event.target.value);
-  }
-
-  setValidStates(val) {
-    const { validator, setValidState, setInvalidState } = this.props;
-    const isValid = validator(val);
-
-    if (validator) {
-      this.setState({
-        isValid,
-        isInvalid: !isValid
-      });
-    }
-
-    if (setValidState) {
-      setValidState(isValid);
-      setInvalidState(!isValid);
-    }
-  }
-
-  render() {
-    const { theme, validator, validateOnEvents, ...others } = this.props;
-    const { isValid, isInvalid } = this.state;
-
-    const validateOnBlur =
-      validateOnEvents && validateOnEvents.find(e => e === "blur");
-
-    return (
-      <Input
-        isValid={isValid}
-        isInvalid={isInvalid}
-        theme={theme}
-        onBlur={validateOnBlur ? this.handleBlur : null}
-        {...others}
-      />
-    );
-  }
-}
+  return (
+    <Input
+      isValid={isValid}
+      isInvalid={isInvalid}
+      disabled={disabled}
+      theme={theme}
+      onBlur={
+        validateOnBlur
+          ? () => {
+              const isValid = validator(event.target.value);
+              setIsValid(isValid);
+              setIsInvalid(!isValid);
+            }
+          : null
+      }
+    />
+  );
+};
 
 export default FormInput;
