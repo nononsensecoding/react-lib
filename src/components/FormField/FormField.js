@@ -13,22 +13,27 @@ const Container = styled.div`
   }
 `;
 
-const FormField = ({ name, children }) => {
-  const { getField, setFieldValidationFlags } = useContext(FormContext);
+const FormField = ({ name, isDefaultValid, isDefaultInvalid, children }) => {
+  const { getField, registerField, setFieldValidationFlags } = useContext(
+    FormContext
+  );
 
   useEffect(() => {
-    setFieldValidationFlags(name, {
-      isValid: false,
-      isInvalid: false
+    registerField({
+      name,
+      isValid: isDefaultValid || false,
+      isInvalid: isDefaultInvalid || false
     });
   }, [name]);
+
+  const { isValid, isInvalid } = getField(name) || {};
 
   return (
     <FormFieldContext.Provider
       value={{
         name,
-        isValid: getField(name).isValid,
-        isInvalid: getField(name).isInvalid,
+        isValid,
+        isInvalid,
         setValidationFlags: flags => {
           setFieldValidationFlags(name, flags);
         }

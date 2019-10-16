@@ -12,20 +12,27 @@ const Form = ({ children }) => {
           fields,
           setFields,
           getField: name => fields[name] || {},
-          setFieldValidationFlags: (name, flags) => {
+          registerField: field => {
+            setFields(prevState => ({
+              ...prevState,
+              [field.name]: field
+            }));
+          },
+          setFieldValidationFlags: (name, flags) =>
             setFields(prevState => ({
               ...prevState,
               [name]: {
                 ...prevState[name],
                 ...flags
               }
-            }));
-          }
+            }))
         }}
       >
-        Valid: {isFormValid(fields) ? "true" : "false"}
-        <br />
-        Invalid: {isFormInvalid(fields) ? "true" : "false"}
+        <p>
+          Valid: {isFormValid(fields) ? "true" : "false"}
+          <br />
+          Invalid: {isFormInvalid(fields) ? "true" : "false"}
+        </p>
         {children}
       </FormContext.Provider>
     </form>

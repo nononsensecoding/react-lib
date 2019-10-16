@@ -1,19 +1,19 @@
 # React Lib
 
-This is collection of accessible, high quality, themeable, openly available React components.
+A collection of accessible, high quality, themeable, openly available React components.
 
 # Features of this Project
 
-- Distributable per component
-- Minimal dependencies
-- Themeable
-- React
-- Isolated Development Environment (Storybook)
-- Automated Testing (Jest)
-- Automated Versioned Releases with CHANGELOG entries
-- Automated npm publishing
-- Automated Git release tagging
-- Continuous deployment for documentation
+- [x] Distributable per component
+- [x] Minimal dependencies
+- [x] Themeable
+- [x] React
+- [x] Isolated Development Environment (Storybook)
+- [] Automated Testing (Jest)
+- [] Automated Versioned Releases with CHANGELOG entries
+- [] Automated npm publishing
+- [] Automated Git release tagging
+- [] Continuous deployment for documentation
 
 # How to Get Started as a User
 
@@ -27,15 +27,11 @@ This is collection of accessible, high quality, themeable, openly available Reac
 
    ```jsx
    import Button from '@nononsensecoding/react-lib/Button'
-   import Statistic from '@nononsensecoding/react-lib/Statistic'
-   import Calendar from '@nononsensecoding/react-lib/Calendar'
 
    render() {
        return (
            <div>
                 <Button onClick={(e) => console.log(e)}>Click me</Button>
-                <p>We saved <Statistic>2000</Statistic> hours in a single week using react-lib!</p>
-                <Calendar month={1} day={20} year={2019} />
            </div>
        )
    }

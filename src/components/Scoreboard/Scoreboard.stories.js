@@ -14,7 +14,7 @@ const formatSeasonRecord = team =>
 const formatGameStatus = game =>
   `${game.status.abstractGameState}${game.linescore.hasShootout ? "/SO" : ""}`;
 
-export const stack = () => (
+export const withGames = () => (
   <div>
     {data.dates[0].games.map(game => (
       <Scoreboard

@@ -1,6 +1,7 @@
 import React from "react";
+import Form from "../Form";
 import FormField from "./FormField";
-import FormInput from "../FormInput";
+import FormFieldInput from "../FormFieldInput";
 import FormFieldLabel from "../FormFieldLabel";
 
 export default {
@@ -8,22 +9,28 @@ export default {
 };
 
 export const defaultUsage = () => (
-  <FormField>
-    <FormFieldLabel>Username:</FormFieldLabel>
-    <FormInput name="username" />
-  </FormField>
+  <Form>
+    <FormField name="field1">
+      <FormFieldLabel>Username:</FormFieldLabel>
+      <FormFieldInput />
+    </FormField>
+  </Form>
 );
 
 export const validState = () => (
-  <FormField isDefaultValid={true}>
-    <FormFieldLabel>Username:</FormFieldLabel>
-    <FormInput name="username" />
-  </FormField>
+  <Form>
+    <FormField name="field1" isDefaultValid={true}>
+      <FormFieldLabel>Username:</FormFieldLabel>
+      <FormFieldInput />
+    </FormField>
+  </Form>
 );
 
 export const invalidState = () => (
-  <FormField isDefaultInvalid={true}>
-    <FormFieldLabel>Username:</FormFieldLabel>
-    <FormInput name="username" />
-  </FormField>
+  <Form>
+    <FormField name="field1" isDefaultInvalid={true}>
+      <FormFieldLabel>Username:</FormFieldLabel>
+      <FormFieldInput />
+    </FormField>
+  </Form>
 );
