@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import FormFieldContext from "./FormFieldContext";
+import FormContext from "../Form/FormContext";
 
 const Container = styled.div`
   display: flex;
@@ -12,17 +13,25 @@ const Container = styled.div`
   }
 `;
 
-const FormField = ({ isDefaultValid, isDefaultInvalid, children }) => {
-  const [isValid, setIsValid] = useState(isDefaultValid);
-  const [isInvalid, setIsInvalid] = useState(isDefaultInvalid);
+const FormField = ({ name, children }) => {
+  const { getField, setFieldValidationFlags } = useContext(FormContext);
+
+  useEffect(() => {
+    setFieldValidationFlags(name, {
+      isValid: false,
+      isInvalid: false
+    });
+  }, [name]);
 
   return (
     <FormFieldContext.Provider
       value={{
-        isValid,
-        isInvalid,
-        setIsValid,
-        setIsInvalid
+        name,
+        isValid: getField(name).isValid,
+        isInvalid: getField(name).isInvalid,
+        setValidationFlags: flags => {
+          setFieldValidationFlags(name, flags);
+        }
       }}
     >
       <Container>{children}</Container>

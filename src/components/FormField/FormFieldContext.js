@@ -1,10 +1,10 @@
 import React from "react";
 
 const FormFieldContext = React.createContext({
+  name: null,
   isValid: false,
   isInvalid: false,
-  setIsValid: () => {},
-  setIsInvalid: () => {}
+  setValidationFlags: () => {}
 });
 
 export default FormFieldContext;

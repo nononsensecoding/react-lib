@@ -3,7 +3,7 @@ import FormFieldContext from "../FormField/FormFieldContext";
 import Input from "../Input";
 
 const FormInput = ({ theme, validator, validateOnEvents, disabled }) => {
-  const { isValid, setIsValid, isInvalid, setIsInvalid } = useContext(
+  const { name, isValid, isInvalid, setValidationFlags } = useContext(
     FormFieldContext
   );
 
@@ -12,6 +12,7 @@ const FormInput = ({ theme, validator, validateOnEvents, disabled }) => {
 
   return (
     <Input
+      name={name}
       isValid={isValid}
       isInvalid={isInvalid}
       disabled={disabled}
@@ -20,8 +21,7 @@ const FormInput = ({ theme, validator, validateOnEvents, disabled }) => {
         validateOnBlur
           ? () => {
               const isValid = validator(event.target.value);
-              setIsValid(isValid);
-              setIsInvalid(!isValid);
+              setValidationFlags({ isValid, isInvalid: !isValid });
             }
           : null
       }
