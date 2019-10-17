@@ -1,6 +1,8 @@
 export default {
   name: "Default",
 
+  fontFamily: "Helvetica, Arial, sans-serif",
+
   buttonBorderColor: "auto",
   buttonBackgroundColor: "#eee",
   buttonColor: "#333",

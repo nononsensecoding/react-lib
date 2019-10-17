@@ -11,13 +11,15 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 210px;
+  min-width: 210px;
+  width: ${({ width }) => `${width}px` || "210px"};
+  font-family: ${({ theme }) => theme.fontFamily};
 `;
 
 const MonthSelector = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 6px;
+  padding: 4px 0;
 `;
 
 const MonthSelectorMonth = styled.div`
@@ -41,23 +43,30 @@ const CurrentMonth = styled.div`
 
 const Day = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid #333;
-  border-bottom: ${({ isBottomRow }) =>
-    isBottomRow ? "1px solid #333" : "none"};
-  border-left: 1px solid #333;
-  border-right: ${({ isLastDayInRow }) =>
-    isLastDayInRow ? "1px solid #333" : "none"};
-  width: 30px;
-  height: 30px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #333;
+  border-top-width: ${({ isInFirstRow }) => (isInFirstRow ? "1px" : 0)};
+  border-bottom-width: 1px;
+  border-left-width: ${({ isFirstDayInWeek }) =>
+    isFirstDayInWeek ? "1px" : 0};
+  border-right-width: 1px;
+  min-width: 30px;
+  min-height: 30px;
+  width: ${({ width }) => `${width}px` || "30px"};
+  height: ${({ width }) => `${width}px` || "30px"};
   box-sizing: border-box;
   background-color: ${({ isSelectedDay }) => (isSelectedDay ? "#333" : "#fff")};
   color: ${({ isSelectedDay }) => (isSelectedDay ? "#fff" : "#333")};
   cursor: pointer;
+  font-size: 14px;
 `;
 
-const Calendar = ({ startDate = new Date(), theme }) => {
+const DayNumber = styled.div`
+  padding: 4px 0 0 4px;
+`;
+
+const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
   const [selectedDate, setSelectedDate] = useState(startDate);
   const [viewingDate, setViewingDate] = useState(startDate);
 
@@ -74,8 +83,10 @@ const Calendar = ({ startDate = new Date(), theme }) => {
     viewingYear === selectedYear &&
     viewingMonth === selectedMonth;
 
+  const dayWidth = width / 7;
+
   return (
-    <Container theme={theme}>
+    <Container theme={theme} width={width}>
       <MonthSelector>
         <MonthSelectorButton
           onClick={() => setViewingDate(decrementMonth(viewingDate))}
@@ -94,11 +105,14 @@ const Calendar = ({ startDate = new Date(), theme }) => {
           <Day
             key={day}
             isSelectedDay={isDaySelected(day)}
+            isFirstDayInWeek={day === 1 || (day - 1) % 7 === 0}
+            isInFirstRow={day <= 7}
+            width={dayWidth}
             onClick={() =>
               setSelectedDate(new Date(viewingYear, viewingMonth, day))
             }
           >
-            {day}
+            <DayNumber>{day}</DayNumber>
           </Day>
         ))}
       </CurrentMonth>
