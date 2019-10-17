@@ -77,4 +77,10 @@ describe("getFirstDayOfMonth", () => {
     const actual = getFirstDayOfMonth(2019, 9);
     expect(actual).toEqual(expected);
   });
+
+  it("return 0 (Monday) for Jan, 2021", () => {
+    const expected = 3;
+    const actual = getFirstDayOfMonth(2020, 0);
+    expect(actual).toEqual(expected);
+  });
 });

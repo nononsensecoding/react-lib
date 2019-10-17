@@ -97,26 +97,52 @@ describe("onDateSelect", () => {
 
 describe("next month button", () => {
   it("rotates calendar to the next month", () => {
-    const { getByText } = render(
+    const { getByText, getAllByText } = render(
       <Calendar startDate={new Date(2019, 9, 17)} />
     );
 
-    const currentMonth = getByText(/October 2019/);
-    fireEvent.click(getByText(/>/));
+    const currentMonth = getByText(/October/);
+    fireEvent.click(getAllByText(/>/)[0]);
 
-    expect(currentMonth).toHaveTextContent("November 2019");
+    expect(currentMonth).toHaveTextContent("November");
   });
 });
 
 describe("previous month button", () => {
   it("rotates calendar to the previous month", () => {
-    const { getByText } = render(
+    const { getByText, getAllByText } = render(
       <Calendar startDate={new Date(2019, 9, 17)} />
     );
 
-    const currentMonth = getByText(/October 2019/);
-    fireEvent.click(getByText(/</));
+    const currentMonth = getByText(/October/);
+    fireEvent.click(getAllByText(/</)[0]);
 
-    expect(currentMonth).toHaveTextContent("September 2019");
+    expect(currentMonth).toHaveTextContent("September");
+  });
+});
+
+describe("next year button", () => {
+  it("rotates calendar to the next year", () => {
+    const { getByText, getAllByText } = render(
+      <Calendar startDate={new Date(2019, 9, 17)} />
+    );
+
+    const currentYear = getByText(/2019/);
+    fireEvent.click(getAllByText(/>/)[1]);
+
+    expect(currentYear).toHaveTextContent("2020");
+  });
+});
+
+describe("previous year button", () => {
+  it("rotates calendar to the previous year", () => {
+    const { getByText, getAllByText } = render(
+      <Calendar startDate={new Date(2019, 9, 17)} />
+    );
+
+    const currentYear = getByText(/2019/);
+    fireEvent.click(getAllByText(/</)[1]);
+
+    expect(currentYear).toHaveTextContent("2018");
   });
 });

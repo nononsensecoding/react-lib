@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  getDaysInMonthArray,
   addMonths,
-  getFirstDayOfMonth,
-  getDayOfWeekName
+  getDaysInMonthArray,
+  getFirstDayOfMonth
 } from "../../utils/date";
 import { fillIntegerArray } from "../../utils/array";
-import { monthNames } from "../../data/strings.en-CA";
+import { dayNames, monthNames } from "../../data/strings.en-CA";
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -18,13 +17,13 @@ const Container = styled.div`
   font-family: ${({ theme }) => theme.fontFamily};
 `;
 
-const MonthSelector = styled.div`
+const Navigation = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 10px 0;
+  padding: 0 0 10px 0;
 `;
 
-const MonthSelectorMonth = styled.div`
+const NavigationLabel = styled.div`
   display: flex;
   box-sizing: border-box;
   align-items: center;
@@ -33,7 +32,7 @@ const MonthSelectorMonth = styled.div`
   font-weight: bold;
 `;
 
-const MonthSelectorButton = styled.button`
+const NavigationButton = styled.button`
   display: flex;
   box-sizing: border-box;
 `;
@@ -70,6 +69,7 @@ const EmptyDay = styled(Day)`
   border-right-color: ${({ isLastEmptyDay }) =>
     isLastEmptyDay ? "#333" : "#fff"};
   border-left-width: ${({ isFirstDayInRow }) => (isFirstDayInRow ? "1px" : 0)};
+  cursor: auto;
 `;
 
 const DayNumber = styled.div`
@@ -104,10 +104,8 @@ const Calendar = ({
   const selectedYear = selectedDate.getFullYear();
   const selectedMonth = selectedDate.getMonth();
   const selectedDay = selectedDate.getDate();
-
   const viewingYear = viewingDate.getFullYear();
   const viewingMonth = viewingDate.getMonth();
-
   const daysInViewingMonth = getDaysInMonthArray(viewingYear, viewingMonth);
 
   const isDaySelected = day =>
@@ -116,9 +114,7 @@ const Calendar = ({
     viewingMonth === selectedMonth;
 
   const dayWidth = width / 7;
-
   const firstDayOfViewingMonth = getFirstDayOfMonth(viewingYear, viewingMonth);
-
   const emptyStartDays = fillIntegerArray(firstDayOfViewingMonth);
   const daysOfWeek = fillIntegerArray(7);
 
@@ -138,24 +134,37 @@ const Calendar = ({
 
   return (
     <Container theme={theme} width={width}>
-      <MonthSelector>
-        <MonthSelectorButton
+      <Navigation>
+        <NavigationButton
           onClick={() => setViewingDate(addMonths(viewingDate, -1))}
         >
           &lt;
-        </MonthSelectorButton>
-        <MonthSelectorMonth>{`${monthNames[viewingMonth]} ${viewingYear}`}</MonthSelectorMonth>
-        <MonthSelectorButton
+        </NavigationButton>
+        <NavigationLabel>{monthNames[viewingMonth]}</NavigationLabel>
+        <NavigationButton
           onClick={() => setViewingDate(addMonths(viewingDate, 1))}
         >
           &gt;
-        </MonthSelectorButton>
-      </MonthSelector>
+        </NavigationButton>
+      </Navigation>
+      <Navigation>
+        <NavigationButton
+          onClick={() => setViewingDate(addMonths(viewingDate, -12))}
+        >
+          &lt;
+        </NavigationButton>
+        <NavigationLabel>{viewingYear}</NavigationLabel>
+        <NavigationButton
+          onClick={() => setViewingDate(addMonths(viewingDate, 12))}
+        >
+          &gt;
+        </NavigationButton>
+      </Navigation>
       <CurrentMonth>
         <DaysOfWeek>
           {daysOfWeek.map(day => (
             <DaysOfWeekDay key={day} width={dayWidth}>
-              {getDayOfWeekName(new Date(viewingYear, viewingMonth, day - 1))}
+              {dayNames[day - 1].substring(0, 3)}
             </DaysOfWeekDay>
           ))}
         </DaysOfWeek>
