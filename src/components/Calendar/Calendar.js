@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {
   getDaysInMonthArray,
-  incrementMonth,
-  decrementMonth,
+  addMonths,
+  getFirstDayOfMonth,
   getDayOfWeekName
 } from "../../utils/date";
 import { fillIntegerArray } from "../../utils/array";
@@ -92,7 +92,12 @@ const DaysOfWeekDay = styled.div`
   font-size: 14px;
 `;
 
-const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
+const Calendar = ({
+  startDate = new Date(),
+  width = 350,
+  onDateSelect,
+  theme
+}) => {
   const [selectedDate, setSelectedDate] = useState(startDate);
   const [viewingDate, setViewingDate] = useState(startDate);
 
@@ -112,26 +117,30 @@ const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
 
   const dayWidth = width / 7;
 
-  const firstDayOfMonthDayOfWeek = new Date(
-    viewingYear,
-    viewingMonth,
-    1
-  ).getDay();
+  const firstDayOfViewingMonth = getFirstDayOfMonth(viewingYear, viewingMonth);
 
-  const emptyStartDays = fillIntegerArray(firstDayOfMonthDayOfWeek);
+  const emptyStartDays = fillIntegerArray(firstDayOfViewingMonth);
   const daysOfWeek = fillIntegerArray(7);
+
+  const handleDateSelect = dayDate => {
+    setSelectedDate(dayDate);
+
+    if (onDateSelect) {
+      onDateSelect(dayDate);
+    }
+  };
 
   return (
     <Container theme={theme} width={width}>
       <MonthSelector>
         <MonthSelectorButton
-          onClick={() => setViewingDate(decrementMonth(viewingDate))}
+          onClick={() => setViewingDate(addMonths(viewingDate, -1))}
         >
           &lt;
         </MonthSelectorButton>
         <MonthSelectorMonth>{`${monthNames[viewingMonth]} ${viewingYear}`}</MonthSelectorMonth>
         <MonthSelectorButton
-          onClick={() => setViewingDate(incrementMonth(viewingDate))}
+          onClick={() => setViewingDate(addMonths(viewingDate, 1))}
         >
           &gt;
         </MonthSelectorButton>
@@ -150,7 +159,6 @@ const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
             isFirstDayInRow={i === 0}
             isLastEmptyDay={i === emptyStartDays.length - 1}
             width={dayWidth}
-            isInFirstRow
           />
         ))}
         {daysInViewingMonth.map(day => {
@@ -160,9 +168,9 @@ const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
               key={day}
               isSelectedDay={isDaySelected(day)}
               isFirstDayInRow={dayDate.getDay() === 0}
-              isInFirstRow={day <= 7 - firstDayOfMonthDayOfWeek}
+              isInFirstRow={day <= 7 - firstDayOfViewingMonth}
               width={dayWidth}
-              onClick={() => setSelectedDate(dayDate)}
+              onClick={() => handleDateSelect(dayDate)}
             >
               <DayNumber>{day}</DayNumber>
             </Day>

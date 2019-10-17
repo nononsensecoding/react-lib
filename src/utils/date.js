@@ -10,20 +10,11 @@ export const getDaysInMonth = (year, month) =>
 export const getDaysInMonthArray = (year, month) =>
   fillIntegerArray(getDaysInMonth(year, month));
 
-export const incrementMonth = date => {
-  if (date.getMonth() === 11) {
-    new Date(date.getFullYear() + 1, 0, 1);
-  }
-
-  return new Date(date.getFullYear(), date.getMonth() + 1, 1);
-};
-
-export const decrementMonth = date => {
-  if (date.getMonth() === 0) {
-    new Date(date.getFullYear() - 1, 11, 1);
-  }
-
-  return new Date(date.getFullYear(), date.getMonth() - 1, 1);
+export const addMonths = (date, months = 0) => {
+  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
 };
 
 export const getDayOfWeekName = date => date.toDateString().split(" ")[0];
+
+export const getFirstDayOfMonth = (year, month) =>
+  new Date(year, month, 1).getDay();
