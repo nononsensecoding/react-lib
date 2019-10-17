@@ -52,34 +52,54 @@ const Day = styled.div`
   width: 30px;
   height: 30px;
   box-sizing: border-box;
+  background-color: ${({ isSelectedDay }) => (isSelectedDay ? "#333" : "#fff")};
+  color: ${({ isSelectedDay }) => (isSelectedDay ? "#fff" : "#333")};
+  cursor: pointer;
 `;
 
 const Calendar = ({ startDate = new Date(), theme }) => {
   const [selectedDate, setSelectedDate] = useState(startDate);
+  const [viewingDate, setViewingDate] = useState(startDate);
+
   const selectedYear = selectedDate.getFullYear();
   const selectedMonth = selectedDate.getMonth();
+  const selectedDay = selectedDate.getDate();
 
-  const daysInMonth = getDaysInMonthArray(selectedYear, selectedMonth);
-  const dateString = `${monthNames[selectedMonth]} ${selectedYear}`;
+  const viewingYear = viewingDate.getFullYear();
+  const viewingMonth = viewingDate.getMonth();
+
+  const daysInViewingMonth = getDaysInMonthArray(viewingYear, viewingMonth);
+  const isDaySelected = day =>
+    selectedDay === day &&
+    viewingYear === selectedYear &&
+    viewingMonth === selectedMonth;
 
   return (
     <Container theme={theme}>
       <MonthSelector>
         <MonthSelectorButton
-          onClick={() => setSelectedDate(decrementMonth(selectedDate))}
+          onClick={() => setViewingDate(decrementMonth(viewingDate))}
         >
           &lt;
         </MonthSelectorButton>
-        <MonthSelectorMonth>{dateString}</MonthSelectorMonth>
+        <MonthSelectorMonth>{`${monthNames[viewingMonth]} ${viewingYear}`}</MonthSelectorMonth>
         <MonthSelectorButton
-          onClick={() => setSelectedDate(incrementMonth(selectedDate))}
+          onClick={() => setViewingDate(incrementMonth(viewingDate))}
         >
           &gt;
         </MonthSelectorButton>
       </MonthSelector>
       <CurrentMonth>
-        {daysInMonth.map(day => (
-          <Day key={day}>{day}</Day>
+        {daysInViewingMonth.map(day => (
+          <Day
+            key={day}
+            isSelectedDay={isDaySelected(day)}
+            onClick={() =>
+              setSelectedDate(new Date(viewingYear, viewingMonth, day))
+            }
+          >
+            {day}
+          </Day>
         ))}
       </CurrentMonth>
     </Container>
