@@ -7,9 +7,5 @@ export const isFormValid = fields => {
 export const isFormInvalid = fields => {
   const allFields = Object.values(fields);
   const invalidFields = allFields.filter(obj => obj.isInvalid);
-  return invalidFields.length;
+  return invalidFields.length > 0;
 };
-
-export const isValidEmail = val => val.includes("@");
-
-export const isValidUsername = val => isValidEmail(val) && val.length > 8;
