@@ -122,11 +122,17 @@ const Calendar = ({
   const emptyStartDays = fillIntegerArray(firstDayOfViewingMonth);
   const daysOfWeek = fillIntegerArray(7);
 
-  const handleDateSelect = dayDate => {
-    setSelectedDate(dayDate);
+  const handleDateSelect = date => {
+    setSelectedDate(date);
 
     if (onDateSelect) {
-      onDateSelect(dayDate);
+      onDateSelect(date);
+    }
+  };
+
+  const handleKeyPress = (charCode, date) => {
+    if (charCode === 13 || charCode === 32) {
+      handleDateSelect(date);
     }
   };
 
@@ -162,15 +168,17 @@ const Calendar = ({
           />
         ))}
         {daysInViewingMonth.map(day => {
-          const dayDate = new Date(viewingYear, viewingMonth, day);
+          const date = new Date(viewingYear, viewingMonth, day);
           return (
             <Day
               key={day}
+              tabIndex={0}
               isSelectedDay={isDaySelected(day)}
-              isFirstDayInRow={dayDate.getDay() === 0}
+              isFirstDayInRow={date.getDay() === 0}
               isInFirstRow={day <= 7 - firstDayOfViewingMonth}
               width={dayWidth}
-              onClick={() => handleDateSelect(dayDate)}
+              onClick={() => handleDateSelect(date)}
+              onKeyPress={event => handleKeyPress(event.charCode, date)}
             >
               <DayNumber>{day}</DayNumber>
             </Day>
