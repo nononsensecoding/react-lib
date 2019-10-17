@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormContext from "./FormContext";
-import { isFormValid, isFormInvalid } from "../../utils";
+import { isFormValid, isFormInvalid } from "../../utils/form";
 
 const Form = ({ children }) => {
   const [fields, setFields] = useState({});

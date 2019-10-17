@@ -1,4 +1,4 @@
-import { isFormValid, isFormInvalid } from "./index";
+import { isFormValid, isFormInvalid } from "./form";
 
 describe("isFormValid", () => {
   it("returns true when all fields are valid", () => {
