@@ -3,8 +3,10 @@ import styled from "styled-components";
 import {
   getDaysInMonthArray,
   incrementMonth,
-  decrementMonth
+  decrementMonth,
+  getDayOfWeekName
 } from "../../utils/date";
+import { fillIntegerArray } from "../../utils/array";
 import { monthNames } from "../../data/strings.en-CA";
 
 const Container = styled.div`
@@ -19,7 +21,7 @@ const Container = styled.div`
 const MonthSelector = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 4px 0;
+  padding: 10px 0;
 `;
 
 const MonthSelectorMonth = styled.div`
@@ -28,6 +30,7 @@ const MonthSelectorMonth = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
+  font-weight: bold;
 `;
 
 const MonthSelectorButton = styled.button`
@@ -48,8 +51,7 @@ const Day = styled.div`
   border-color: #333;
   border-top-width: ${({ isInFirstRow }) => (isInFirstRow ? "1px" : 0)};
   border-bottom-width: 1px;
-  border-left-width: ${({ isFirstDayInWeek }) =>
-    isFirstDayInWeek ? "1px" : 0};
+  border-left-width: ${({ isFirstDayInRow }) => (isFirstDayInRow ? "1px" : 0)};
   border-right-width: 1px;
   min-width: 30px;
   min-height: 30px;
@@ -62,8 +64,32 @@ const Day = styled.div`
   font-size: 14px;
 `;
 
+const EmptyDay = styled(Day)`
+  border-top-color: #fff;
+  border-left-color: #fff;
+  border-right-color: ${({ isLastEmptyDay }) =>
+    isLastEmptyDay ? "#333" : "#fff"};
+  border-left-width: ${({ isFirstDayInRow }) => (isFirstDayInRow ? "1px" : 0)};
+`;
+
 const DayNumber = styled.div`
   padding: 4px 0 0 4px;
+`;
+
+const DaysOfWeek = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+`;
+
+const DaysOfWeekDay = styled.div`
+  display: flex;
+  min-width: 30px;
+  width: ${({ width }) => `${width}px` || "30px"};
+  box-sizing: border-box;
+  justify-content: center;
+  padding: 10px 0;
+  font-size: 14px;
 `;
 
 const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
@@ -78,12 +104,22 @@ const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
   const viewingMonth = viewingDate.getMonth();
 
   const daysInViewingMonth = getDaysInMonthArray(viewingYear, viewingMonth);
+
   const isDaySelected = day =>
     selectedDay === day &&
     viewingYear === selectedYear &&
     viewingMonth === selectedMonth;
 
   const dayWidth = width / 7;
+
+  const firstDayOfMonthDayOfWeek = new Date(
+    viewingYear,
+    viewingMonth,
+    1
+  ).getDay();
+
+  const emptyStartDays = fillIntegerArray(firstDayOfMonthDayOfWeek);
+  const daysOfWeek = fillIntegerArray(7);
 
   return (
     <Container theme={theme} width={width}>
@@ -101,20 +137,37 @@ const Calendar = ({ startDate = new Date(), width = 350, theme }) => {
         </MonthSelectorButton>
       </MonthSelector>
       <CurrentMonth>
-        {daysInViewingMonth.map(day => (
-          <Day
-            key={day}
-            isSelectedDay={isDaySelected(day)}
-            isFirstDayInWeek={day === 1 || (day - 1) % 7 === 0}
-            isInFirstRow={day <= 7}
+        <DaysOfWeek>
+          {daysOfWeek.map(day => (
+            <DaysOfWeekDay key={day} width={dayWidth}>
+              {getDayOfWeekName(new Date(viewingYear, viewingMonth, day - 1))}
+            </DaysOfWeekDay>
+          ))}
+        </DaysOfWeek>
+        {emptyStartDays.map((day, i) => (
+          <EmptyDay
+            key={i}
+            isFirstDayInRow={i === 0}
+            isLastEmptyDay={i === emptyStartDays.length - 1}
             width={dayWidth}
-            onClick={() =>
-              setSelectedDate(new Date(viewingYear, viewingMonth, day))
-            }
-          >
-            <DayNumber>{day}</DayNumber>
-          </Day>
+            isInFirstRow
+          />
         ))}
+        {daysInViewingMonth.map(day => {
+          const dayDate = new Date(viewingYear, viewingMonth, day);
+          return (
+            <Day
+              key={day}
+              isSelectedDay={isDaySelected(day)}
+              isFirstDayInRow={dayDate.getDay() === 0}
+              isInFirstRow={day <= 7 - firstDayOfMonthDayOfWeek}
+              width={dayWidth}
+              onClick={() => setSelectedDate(dayDate)}
+            >
+              <DayNumber>{day}</DayNumber>
+            </Day>
+          );
+        })}
       </CurrentMonth>
     </Container>
   );

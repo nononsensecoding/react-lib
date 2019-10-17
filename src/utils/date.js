@@ -25,3 +25,5 @@ export const decrementMonth = date => {
 
   return new Date(date.getFullYear(), date.getMonth() - 1, 1);
 };
+
+export const getDayOfWeekName = date => date.toDateString().split(" ")[0];

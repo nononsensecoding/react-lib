@@ -9,7 +9,7 @@ A collection of accessible, high quality, themeable, openly available React comp
 - [x] Themeable
 - [x] React
 - [x] Isolated Development Environment (Storybook)
-- [ ] Automated Testing (Jest)
+- [x] Automated Testing (Jest)
 - [ ] Automated Versioned Releases with CHANGELOG entries
 - [ ] Automated npm publishing
 - [ ] Automated Git release tagging
