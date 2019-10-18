@@ -10,14 +10,18 @@ A collection of accessible, high quality, themeable, openly available React comp
 
 - [x] Minimal dependencies
 - [x] Import individual components as needs
+- [x] No complex configurations
+- [x] No unstable polyfills or plugins
+- [x] No experimental features
 - [x] Pre-packaged themes
 - [ ] Inject your own theme
 
 ## Development
 
-- [x] Isolated Development Environment (Storybook)
-- [x] Automated Testing (Jest)
-- [ ] Automated Versioned Releases with CHANGELOG entries
+- [x] Isolated development environment (Storybook)
+- [x] Automated testing (Jest)
+- [ ] Continuous integration with Pull Request feedback
+- [ ] Automated versioned releases with CHANGELOG entries
 - [ ] Automated npm publishing
 - [ ] Automated Git release tagging
 - [ ] Continuous deployment for documentation

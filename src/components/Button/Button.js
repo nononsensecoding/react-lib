@@ -6,7 +6,6 @@ const Button = styled.button`
   border-color: ${({ theme }) => theme.buttonBorderColor || "#ccc"};
   color: ${({ theme }) => theme.buttonColor || "#000"};
   font-size: ${({ theme }) => theme.buttonFontSize || "16px"};
-  min-width: 100px;
   margin-bottom: 0;
   font-weight: 400;
   text-align: center;

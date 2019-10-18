@@ -27,11 +27,6 @@
     "url": "https://github.com/nononsensecoding/react-lib/issues"
   },
   "homepage": "https://github.com/nononsensecoding/react-lib#readme",
-  "jest": {
-    "setupFiles": [
-      "test.setup.js"
-    ]
-  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.6.4",
