@@ -20,5 +20,16 @@ export default {
   h3Color: "#333",
   h4Color: "#333",
   h5Color: "#333",
-  h6Color: "#333"
+  h6Color: "#333",
+
+  marqueeColor: "#fff",
+  marqueeBackgroundColor: "#333",
+  marqueeSectionLabelColor: "#fafafa",
+  marqueeSectionLabelBackgroundColor: "#424242",
+  marqueeSectionItemLabelColor: "#bdbdbd",
+  marqueeSectionItemValueColor: "#fff176",
+
+  streamOverlayBorderColor: "#ccc",
+  streamOverlayTickerColor: "#fff",
+  streamOverlayTickerBackgroundColor: "#333"
 };
