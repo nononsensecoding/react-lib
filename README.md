@@ -1,13 +1,20 @@
 # React Lib
 
+> **This project is under heavy development**. You can follow the progress live on [Twitch](https://www.twitch.tv/nononsensecoding) or watch previous broadcasts on [YouTube](https://www.youtube.com/channel/UCkDMBuT1tePRJKMAy0R-Xmg).
+
 A collection of accessible, high quality, themeable, openly available React components.
 
 # Features of this Project
 
-- [x] Distributable per component
+## Using in Your Apps
+
 - [x] Minimal dependencies
-- [x] Themeable
-- [x] React
+- [x] Import individual components as needs
+- [x] Pre-packaged themes
+- [ ] Inject your own theme
+
+## Development
+
 - [x] Isolated Development Environment (Storybook)
 - [x] Automated Testing (Jest)
 - [ ] Automated Versioned Releases with CHANGELOG entries
