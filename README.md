@@ -34,11 +34,13 @@ A collection of accessible, high quality, themeable, openly available React comp
 
    ```jsx
    import Button from '@nononsensecoding/react-lib/Button'
+   import Calendar from '@nononsensecoding/react-lib/Calendar'
 
    render() {
        return (
            <div>
                 <Button onClick={(e) => console.log(e)}>Click me</Button>
+                <Calendar onDateSelect={(date) => console.log(date)} />
            </div>
        )
    }
