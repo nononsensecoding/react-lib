@@ -3,8 +3,8 @@ export default {
 
   fontFamily: "Helvetica, Arial, sans-serif",
 
-  buttonBorderColor: "auto",
-  buttonBackgroundColor: "#eee",
+  buttonBorderColor: "#ccc",
+  buttonBackgroundColor: "#fff",
   buttonColor: "#333",
   buttonFontSize: "14px",
   buttonHoverFontWeight: "bold",

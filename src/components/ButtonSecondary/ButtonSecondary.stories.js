@@ -5,9 +5,7 @@ export default {
   title: "ButtonSecondary"
 };
 
-export const idle = () => (
-  <ButtonSecondary>Hello Secondary Button</ButtonSecondary>
-);
+export const idle = () => <ButtonSecondary>Secondary Button</ButtonSecondary>;
 
 export const emojiChildren = () => (
   <ButtonSecondary>
@@ -18,13 +16,5 @@ export const emojiChildren = () => (
 );
 
 export const disabled = () => (
-  <ButtonSecondary disabled>Hello Secondary Button</ButtonSecondary>
-);
-
-export const hover = () => (
-  <ButtonSecondary isDefaultHovering>Hello Secondary Button</ButtonSecondary>
-);
-
-export const focused = () => (
-  <ButtonSecondary focused>Implement this</ButtonSecondary>
+  <ButtonSecondary disabled>Secondary Button</ButtonSecondary>
 );
