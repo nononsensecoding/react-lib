@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import FormFieldInput from "../FormFieldInput";
-import FormFieldLabel from "../FormFieldLabel";
-import FormField from "../FormField";
+import FormActions from "../Form/FormActions";
+import FormField from "../Form/FormField";
+import FormFieldInput from "../Form/FormFieldInput";
+import FormFieldLabel from "../Form/FormFieldLabel";
 import Button from "../Button";
-import FormActions from "../FormActions";
 
 const Container = styled.form``;
 

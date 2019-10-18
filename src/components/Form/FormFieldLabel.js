@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import FormFieldContext from "../FormField/FormFieldContext";
+import { FormFieldContext } from "./FormField.context";
 import Label from "../Label";
 
 const FormFieldLabel = props => {

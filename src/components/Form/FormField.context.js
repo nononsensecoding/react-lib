@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormFieldContext = React.createContext({
+export const FormFieldContext = React.createContext({
   name: null,
   isValid: false,
   isInvalid: false,

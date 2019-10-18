@@ -1,8 +1,8 @@
 import React from "react";
 import Form from "./Form";
-import FormField from "../FormField";
-import FormFieldLabel from "../FormFieldLabel";
-import FormFieldInput from "../FormFieldInput";
+import FormField from "./FormField";
+import FormFieldLabel from "./FormFieldLabel";
+import FormFieldInput from "./FormFieldInput";
 
 export default {
   title: "Form"

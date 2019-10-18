@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormContext } from "./Form.context";
 
-export const Form = ({ children }) => {
+const Form = ({ children }) => {
   const [fields, setFields] = useState({});
 
   return (
