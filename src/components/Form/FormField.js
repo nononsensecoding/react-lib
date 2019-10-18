@@ -1,17 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import FormFieldContext from "./FormFieldContext";
-import FormContext from "../Form/FormContext";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-
-  > label {
-    margin-bottom: 6px;
-  }
-`;
+import { FormFieldContext } from "./FormField.context";
+import { FormContext } from "./Form.context";
 
 const FormField = ({ name, isDefaultValid, isDefaultInvalid, children }) => {
   const { getField, registerField, setFieldValidationFlags } = useContext(
@@ -43,5 +33,15 @@ const FormField = ({ name, isDefaultValid, isDefaultInvalid, children }) => {
     </FormFieldContext.Provider>
   );
 };
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  > label {
+    margin-bottom: 6px;
+  }
+`;
 
 export default FormField;

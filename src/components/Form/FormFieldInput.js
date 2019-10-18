@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
-import FormFieldContext from "../FormField/FormFieldContext";
+import { FormFieldContext } from "./FormField.context";
 import Input from "../Input";
 
-const FormFieldInput = ({
+export const FormFieldInput = ({
   theme,
   validator,
   validateOnEvents,
   disabled,
-  type
+  type,
+  aria
 }) => {
   const { name, isValid, isInvalid, setValidationFlags } = useContext(
     FormFieldContext
@@ -32,6 +33,7 @@ const FormFieldInput = ({
             }
           : null
       }
+      {...aria}
     />
   );
 };

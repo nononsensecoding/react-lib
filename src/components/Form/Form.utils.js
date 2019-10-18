@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormContext } from "./Form.context";
 
-export const Form = ({ children, action }) => {
+const Form = ({ children }) => {
   const [fields, setFields] = useState({});
 
   return (
@@ -26,7 +26,7 @@ export const Form = ({ children, action }) => {
           }))
       }}
     >
-      <form action={action}>{children}</form>
+      <form>{children}</form>
     </FormContext.Provider>
   );
 };
